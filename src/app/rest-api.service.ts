@@ -4,6 +4,7 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
+import { ToastrService } from 'ngx-toastr';
 import {
   catchError,
   map,
@@ -24,7 +25,7 @@ export class RestApiService {
   
   url ="http://localhost:3000/users/";
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient,private toastr: ToastrService) { }
 
   get() {
     return this.httpClient.get(this.url)
@@ -43,13 +44,13 @@ export class RestApiService {
       .pipe(
         map(response => {
           console.log('inside map method... ==>', response);
-
+debugger;
           // tslint:disable-next-line: no-string-literal
           if (response['status'] === 200) {
 
             // if (response.data.username) {
             // tslint:disable-next-line: no-string-literal
-          //  this.toastr.success(response['statusMsg']);
+           this.toastr.success("Login successful...");
             return response;
             // } else if (response.data[0].productid) {
             //   this.toastr.success('Product Added sucsessfully......');
@@ -59,7 +60,7 @@ export class RestApiService {
             // tslint:disable-next-line: no-string-literal
           } else if (response['status'] === 400) {
             // tslint:disable-next-line: no-string-literal
-         //   this.toastr.error('Error.... ' + response['statusMsg']);
+          this.toastr.error('Error.... ' + response['statusMsg']);
             return response;
           }
         }) // ,

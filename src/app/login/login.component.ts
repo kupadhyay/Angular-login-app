@@ -9,6 +9,7 @@ import {
 import { Router } from '@angular/router';
 
 import * as CryptoJS from 'crypto-js';
+import { ToastrService } from 'ngx-toastr';
 
 import { RestApiService } from '../rest-api.service';
 
@@ -26,7 +27,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private httpService: RestApiService
+    private httpService: RestApiService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -59,6 +61,8 @@ export class LoginComponent implements OnInit {
     var userExist = this.users.find( function( ele ) { 
         return ele.username === self.form.value.username;
       } );
+
+      debugger;
     if (userExist) {
       // user exists in db.json
       let dbpassword = userExist.password;
@@ -73,11 +77,18 @@ export class LoginComponent implements OnInit {
 
       if(dbpassword == this.form.value.password) {
         // password match and redirect to dashboard
+        this.toastr.success("Login successful...");
+        localStorage.setItem('username', this.form.value.username);
         this.router.navigate(["dashboard"]);
+      }
+      else{
+        //Note: can generate notification service with status and dynamic message...
+        this.toastr.error("Password is wrong...");
       }
     }
     else {
       // no user found...
+      this.toastr.error("Username is not exist...");
     }
   }
 

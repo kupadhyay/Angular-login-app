@@ -1,0 +1,25 @@
+:host {
+    display: flex;
+    justify-content: center;
+    margin: 100px 0px;
+}
+
+mat-card-title,
+mat-card-content {
+    display: flex;
+    justify-content: center;
+}
+
+.material-icons-logout {
+    cursor: pointer;
+}
+
+.welcome {
+    font-size: xx-large;
+    font-weight: bold;
+}
+
+span {
+    display: flex;
+    justify-content: center;
+}
