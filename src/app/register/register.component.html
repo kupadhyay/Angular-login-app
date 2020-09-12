@@ -1,0 +1,33 @@
+<mat-card>
+    <span class="material-icons">
+  person_add
+  </span>
+    <mat-card-title>Register</mat-card-title>
+    <mat-card-content>
+        <form [formGroup]="registerForm" (ngSubmit)="submit()">
+            <p>
+                <mat-form-field>
+                    <input type="text" #inputRef matInput placeholder="Username" formControlName="username">
+                </mat-form-field>
+            </p>
+
+            <p>
+                <mat-form-field>
+                    <input type="password" matInput placeholder="Password" formControlName="password">
+                </mat-form-field>
+            </p>
+
+            <p>
+                <mat-form-field>
+                    <input type="password" matInput placeholder="Confirm Password" formControlName="confPassword">
+                </mat-form-field>
+            </p>
+
+            <div class="button">
+                <button type="submit" mat-button [disabled]="!registerForm.valid">Register</button>
+                <button (click)="onCancel()" mat-button>Cancel</button>
+            </div>
+
+        </form>
+    </mat-card-content>
+</mat-card>
