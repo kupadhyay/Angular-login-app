@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 import * as CryptoJS from 'crypto-js';
 
 import { RestApiService } from '../rest-api.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -24,7 +25,8 @@ export class RegisterComponent implements OnInit {
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
-    private httpService: RestApiService
+    private httpService: RestApiService,
+    private toastr: ToastrService
   ) { }
 
   ngOnInit() {
@@ -74,10 +76,11 @@ export class RegisterComponent implements OnInit {
     ).toString();
     this.username = this.registerForm.value.username;
     this.password = encryptPwd;
-debugger;
     this.httpService.post({username: this.username, password: this.password}).subscribe(
       (data) =>{
-        console.log("get operation data", data);
+        console.log("get operation data1", data);
+        this.toastr.success("User registered successfully...");
+        this.router.navigate(["login"]);
       }
     )
     // this.httpService.getRequest().subscribe((data)=> {

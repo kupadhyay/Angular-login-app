@@ -83,12 +83,12 @@ export class LoginComponent implements OnInit {
       }
       else{
         //Note: can generate notification service with status and dynamic message...
-        this.toastr.error("Password is wrong...");
+        this.toastr.error("Invalid password...");
       }
     }
     else {
       // no user found...
-      this.toastr.error("Username is not exist...");
+      this.toastr.error("Username does not exist...");
     }
   }
 
